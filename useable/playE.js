@@ -864,7 +864,7 @@ function playNow(playItems) {
     }
   }
 }
-export function play(params) {
+function play(params) {
   try {
     var playItems = obtainTweens(params)
     playNow(playItems)
@@ -875,3 +875,5 @@ export function play(params) {
 
 play.random = random
 play.version = '1.0.1'
+
+module.exports = play
