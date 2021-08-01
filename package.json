@@ -1,0 +1,36 @@
+{
+  "name": "play--js",
+  "version": "1.0.1",
+  "description": "Light JavaScript animation library",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anikettyagi13/playjs.git"
+  },
+  "author": {
+    "name": "Aniket Tyagi",
+    "email": "anikettyagi13@gmail.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/anikettyagi13/playjs/issues"
+  },
+  "homepage": "https://anikettyagi13.github.io/playjs-docs/#/",
+  "files": [
+    "useable"
+  ],
+  "keywords": [
+    "play",
+    "animation",
+    "javascript",
+    "CSS",
+    "transforms",
+    "SVG"
+  ],
+  "main": "useable/play.js",
+  "module": "useable/playE.js",
+  "umd:main": "useable/play.min.js",
+  "umd:name": "play"
+}
