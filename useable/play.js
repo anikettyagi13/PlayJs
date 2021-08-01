@@ -682,7 +682,6 @@ function obtainTweens(params) {
     params,
   )
   tweens.threshold = params.threshold
-  console.log(params.animationFunction)
   tweens.animationFunction = getAnimationFunction(params.animationFunction)
   return tweens
 }

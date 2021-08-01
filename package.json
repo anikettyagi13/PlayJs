@@ -1,6 +1,6 @@
 {
-  "name": "play--js",
-  "version": "1.0.1",
+  "name": "playyjs",
+  "version": "1.0.3",
   "description": "Light JavaScript animation library",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
