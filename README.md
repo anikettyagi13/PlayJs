@@ -8,7 +8,7 @@ PlayJS helps to animate DOM elements , CSS properties and SVGs.
 </blockquote>
 
 <p>
-  <a href="https://anikettyagi13.github.io/playjs-docs/#/download">DOWNLOAD</a>&nbsp;|&nbsp;<a href="https://anikettyagi13.github.io/playjs-docs/#/documentation">DOCUMENTATION</a>&nbsp;|&nbsp;
+  <a href="https://anikettyagi13.github.io/playjs-docs/#/download">DOWNLOAD</a>&nbsp;|&nbsp;<a href="https://anikettyagi13.github.io/playjs-docs/#/documentation/">DOCUMENTATION</a>&nbsp;|&nbsp;
 </p>
 
 ## USAGE
