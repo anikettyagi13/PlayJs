@@ -1,5 +1,7 @@
 /* eslint-disable default-case */
 /* eslint-disable no-duplicate-case */
+/* eslint-disable default-case */
+/* eslint-disable no-duplicate-case */
 const acceptableParameters = [
   'targets',
   'duration',
@@ -523,6 +525,19 @@ function getValues(value, parameter) {
   return { value: value, isAttribute: false }
 }
 
+// handling functional values
+function handleFunctionAsAnimationParameter(value){
+  if(value.length===0)
+    return value();
+  else
+    return value;
+}
+
+// handle functional value when called
+function getValueFromFunction(value,timePassed){
+  return value(timePassed);
+}
+
 function getAnimations(params) {
   let animations = []
   let uselessObj = {}
@@ -546,7 +561,7 @@ function getAnimations(params) {
       let v = getValues(uselessObj[i], i)
       let element = {
         animation: i,
-        value: typeof v.value === 'function' ? v.value() : v.value,
+        value: typeof v.value === 'function' ? handleFunctionAsAnimationParameter(v.value) : v.value,
         valuePassed: v.value,
         isAttribute: v.isAttribute,
         timeExpired: null,
@@ -567,7 +582,6 @@ function getAnimations(params) {
 function getAllTargets(target, delay, duration, animations, play, params) {
   try {
     let targets = []
-
     if (Array.isArray(target)) {
       for (var i = 0; i < target.length; i++) {
         let delayNow = Array.isArray(delay) ? delay[i] : delay
@@ -657,8 +671,6 @@ function getValidParams(params) {
   return valid
 }
 
-// write function to get which animation function is to be used
-
 function getAnimationFunction(animation) {
   return animationFunctions(animation)
 }
@@ -714,13 +726,13 @@ function findObjOfAnimation(j, InitialState) {
   var value = j.value
   j.value =
     typeof j.valuePassed === 'function'
-      ? j.valuePassed()
+      ? handleFunctionAsAnimationParameter(j.valuePassed)
       : InitialState[j.animation]
   InitialState[j.animation] = value
   return { j, InitialState }
 }
 
-function CallToAnimationFunction(playItems, t, b, c, d) {
+function CallToAnimationFunction(playItems, t, b, c, d,j) {
   return playItems.animationFunction()(t, b, c, d)
 }
 
@@ -762,7 +774,7 @@ function removePlay(j, i, play) {
       i.InitialState = obj.InitialState
       j = obj.j
     } else {
-      j.value = typeof j.valuePassed === 'function' ? j.valuePassed() : j.value
+      j.value = typeof j.valuePassed === 'function' ? handleFunctionAsAnimationParameter(j.valuePassed) : j.value
     }
     j.timeExpired = 0
   } else {
@@ -811,14 +823,17 @@ function Animation(i, j, playItems, t) {
         } else if (typeof i.animations[j.animation] === 'object') {
           change = getNewChangesInString(j, playItems, i)
         } else {
-          change = CallToAnimationFunction(
+          change = typeof j.value !== 'function'?
+          CallToAnimationFunction(
             playItems,
             j.timeExpired * 0.001,
             i.InitialState[j.animation],
             (typeof j.value === 'function' ? j.value(j.timeExpired) : j.value) -
               i.InitialState[j.animation],
             i.durationInSeconds,
+            j
           )
+          : j.value(j.timeExpired)
         }
         i.animations[j.animation] = change
         applyCSSChanges(i, j)
@@ -873,6 +888,6 @@ function play(params) {
 }
 
 play.random = random
-play.version = '1.0.1'
+play.version = '2.0.0'
 
 module.exports = play

@@ -141,7 +141,7 @@ function getAnimations(params) {
       let v = getValues(uselessObj[i], i)
       let element = {
         animation: i,
-        value: typeof v.value === 'function' ? v.value() : v.value,
+        value: typeof v.value === 'function' ? handleFunctionAsAnimationParameter(v.value) : v.value,
         valuePassed: v.value,
         isAttribute: v.isAttribute,
         timeExpired: null,
@@ -162,7 +162,6 @@ function getAnimations(params) {
 export function getAllTargets(target, delay, duration, animations, play, params) {
   try {
     let targets = []
-
     if (Array.isArray(target)) {
       for (var i = 0; i < target.length; i++) {
         let delayNow = Array.isArray(delay) ? delay[i] : delay

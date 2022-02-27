@@ -24,8 +24,6 @@ function getValidParams(params) {
   return valid
 }
 
-// write function to get which animation function is to be used
-
 function getAnimationFunction(animation) {
   return animationFunctions(animation)
 }
@@ -49,7 +47,6 @@ export default function obtainTweens(params) {
     params,
   )
   tweens.threshold = params.threshold
-  console.log(params.animationFunction)
   tweens.animationFunction = getAnimationFunction(params.animationFunction)
   return tweens
 }
